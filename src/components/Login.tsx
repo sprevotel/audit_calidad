@@ -66,7 +66,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 </form>
 
                 <div className="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
-                    Iniciativa de Calidad - Canedi
+                    <a href="https://gestionreflejo.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                        Reflejo Consultora
+                    </a>
                 </div>
             </div>
         </div>
