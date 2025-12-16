@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Eye, EyeOff } from 'lucide-react';
 
 interface LoginProps {
     onLogin: (isAuthenticated: boolean) => void;
@@ -7,6 +7,7 @@ interface LoginProps {
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -37,19 +38,28 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                         <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
                             Contraseña
                         </label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                                setError(false);
-                            }}
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors outline-none
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    setError(false);
+                                }}
+                                className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors outline-none pr-12
                 ${error ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'}`}
-                            placeholder="Ingrese su contraseña"
-                            autoFocus
-                        />
+                                placeholder="Ingrese su contraseña"
+                                autoFocus
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
                         {error && (
                             <p className="text-red-500 text-sm mt-2 animate-pulse">
                                 Contraseña incorrecta. Intente nuevamente.
